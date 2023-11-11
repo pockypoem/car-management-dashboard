@@ -4,9 +4,24 @@ import morgan from "morgan";
 import compression from "compression";
 import helmet from "helmet";
 import cors from "cors";
+import knex from "knex";
+import { Model } from "objection";
 
 // Routers
 import CarRoutes from "./routers/CarRoutes";
+
+
+const knexInstance = knex({
+    client: "postgresql",
+    connection: {
+      database: 'postgres',
+      user: 'postgres',
+      password: 'docker'
+    },
+});
+
+// Connect ORM to Database
+Model.knex(knexInstance);
 
 
 class App {

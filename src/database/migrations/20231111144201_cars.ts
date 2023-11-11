@@ -8,18 +8,18 @@ export async function up(knex: Knex): Promise<void> {
 
     return knex.schema.createTable('cars', (table) => {
         table.uuid('id').primary().defaultTo(knex.raw('uuid_generate_v4()'));
-        table.string('plate');
-        table.string('manufacture');
-        table.string('model');
-        table.string('image');
-        table.integer('rentPerDay');
-        table.integer('capacity');
-        table.text('description');
-        table.timestamp('availableAt').defaultTo(knex.fn.now());
-        table.string('transmission');
-        table.boolean('available');
-        table.string('type');
-        table.integer('year');
+        table.string("plate", 10).notNullable();
+        table.string("manufacture", 20).notNullable();
+        table.text("image").notNullable();
+        table.string("model", 20).notNullable();
+        table.string("type", 100).notNullable();
+        table.text("description").notNullable();
+        table.string("transmission", 20).notNullable();
+        table.integer("capacity").notNullable();
+        table.bigint("rentPerDay").notNullable();
+        table.datetime("availableAt").notNullable();
+        table.boolean("available").notNullable().defaultTo(false);
+        table.integer("year", 4).notNullable();
         
         table.jsonb('options');
         table.jsonb('specs');

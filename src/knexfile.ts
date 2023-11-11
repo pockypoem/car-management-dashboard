@@ -1,7 +1,7 @@
 import type { Knex } from "knex";
 import path from 'path';
 import dotenv from "dotenv";
-import { knexSnakeCaseMappers } from "objection";
+// import { knexSnakeCaseMappers } from "objection";
 
 // Update with your config settings.
 
@@ -27,7 +27,6 @@ const config: { [key: string]: Knex.Config } = {
     seeds: {
       directory: path.join(__dirname, 'database', 'seeds'),
     },
-    ...knexSnakeCaseMappers(),
   },
 
   production: {
