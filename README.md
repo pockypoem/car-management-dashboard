@@ -1,1 +1,48 @@
+# Binar Car Rental
+
+## Guide to Run 
+* `npm i` to install all the dependencies
+* Don't forget to make your own `.env` based on `example.env`
+* When its finish:
+    * `npm run ts` to compile all these typescript things
+    * `npm run dev` to run the server ⚡
+
+## About Migrations and Seeds
+* `knex migrate:latest` to run the migration's file
+* `knex seed:run` to fill data on database
+
+## Entity Relationship Diagram
+
+For now only one table is available: <br>
+![Table Car](imagesforREADME/tableCars-dbdiagram.png) <br>
+
+## Endpoints
+
+### Frontend
+
 Coming Soon
+
+### Backend
+Method | URI | Description | 
+------ | --- | ----------- |
+**GET** | `/api/v1/cars/` | Display all cars data from database |
+**GET** | `/api/v1/cars/:id` | Display specific car data from database by ID |
+**POST** | `/api/v1/cars/` | Display specific car data from database by ID |
+**UPDATE** | `/api/v1/cars/:id` | Update specific car data from database by ID |
+**DELETE** | `/api/v1/cars/:id` | Delete specific car data from database by ID |
+
+<br>
+
+You can see about the collections of those endpoint in [this postman's collection link](https://api.postman.com/collections/17866226-0f681f4e-3adc-4cc0-934e-47fd02781c1e?access_key=PMAT-01HEWNMCSMQ6801R6N5XCNDDG4)
+
+<br>
+
+> If you want to try and input data or update data, you can use data from [this](https://github.com/pockypoem/car-management-dashboard/blob/main/src/data/cars.json)
+
+
+## Tech Stack
+* Backend
+    * typescript
+    * nodejs, expressjs
+* Database
+    * postgre SQL
