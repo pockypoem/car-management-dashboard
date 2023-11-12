@@ -19,8 +19,10 @@ For now only one table is available: <br>
 ## Endpoints
 
 ### Frontend
-
-Coming Soon
+ URI | Description | 
+ --- | ----------- |
+/    | index (landing page) |
+/cars | Find Available Car |
 
 ### Backend
 Method | URI | Description | 

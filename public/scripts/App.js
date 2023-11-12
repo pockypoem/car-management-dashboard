@@ -57,11 +57,15 @@ class App {
     // }
 
     async getCarsData(inputTanggal, waktuJemput, jumlahPenumpang) {
-        const url = 'https://raw.githubusercontent.com/pockypoem/synrgy-challenges/challenge04/data/cars.min.json';
+        const querystring = new URLSearchParams()
+        querystring.append('inputTanggal', inputTanggal)
+        querystring.append('waktuJemput', waktuJemput)
+        querystring.append('jumlahPenumpang', jumlahPenumpang)
+
+        const url = `http://localhost:8000/api/v1/cars?${querystring.toString()}`;
         const response = await fetch(url);
         const jsonResponse = await response.json();
 
-        // Mengonversi nilai properti "availableAt" menjadi array ["YYYY-MM-DD", "HH:MM"]
         const convertedData = jsonResponse.map(item => {
             const dateObj = new Date(item.availableAt);
             const wibDate = dateObj.toISOString().split('T')[0];
@@ -72,7 +76,7 @@ class App {
             };
         });
 
-        this.carComponent.render(convertedData, inputTanggal, waktuJemput, jumlahPenumpang);
+        this.carComponent.render(convertedData);
 
         // this.resetForm();
         this.tombolCariMobil.setAttribute("disabled", "disabled");

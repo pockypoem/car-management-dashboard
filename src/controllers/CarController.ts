@@ -7,13 +7,29 @@ import CarModel from "../database/models/cars";
 class CarController implements IController {
     async index(req: Request, res: Response): Promise<Response> {
       try {
-        const cars = await CarModel.query();
+        const { inputTanggal, waktuJemput, jumlahPenumpang } = req.query
+        const qCars = CarModel.query();
+
+        if (jumlahPenumpang) {
+          qCars.where('capacity', '>=', +jumlahPenumpang)
+        }
+
+        if (inputTanggal) {
+          qCars.whereRaw("to_char(\"availableAt\", 'YYYY-MM-DD') = ?", [inputTanggal as string])
+        }
+
+        if (waktuJemput) {
+          qCars.whereRaw("to_char(\"availableAt\", 'HH24:MI') <= ?", [waktuJemput])
+        }
+
+        const cars = await qCars.debug()
         return res.status(200).json(cars);
       } catch (error) {
         console.error(error);
         return res.status(500).json({
           error: "Internal Server Error"
         })
+        
       }
     }
 

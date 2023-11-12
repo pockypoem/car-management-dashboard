@@ -14,39 +14,8 @@ class Car extends Component {
         return formattedCurrency;
     }
 
-    filterCarsData(data, inputTanggal, waktuJemput, jumlahPenumpang) {
-        const availableCars = data.filter(car => {
-            const [dataDate, dataTime] = car.availableAt;
-            const dataCapacity = car.capacity;
-            const [dataHours, dataMinutes] = dataTime.split(':');
 
-            // waktu jemput: "T01:00:00Z"
-
-            const waktuJemputArray = waktuJemput.split(':');
-
-            const inputHours = waktuJemputArray[0].substring(1); // Menghilangkan "T" dari awal string
-            const inputMinutes = waktuJemputArray[1];
-
-            // const [inputHours, inputMinutes] = waktuJemput.split(':');
-            
-            if (dataDate === inputTanggal) {
-                if (dataCapacity >= jumlahPenumpang) {
-                    if (inputHours > dataHours) {
-                        return true;
-                    } else if (inputHours === dataHours && inputMinutes >= dataMinutes) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-            return false;
-        });
-
-        return availableCars;
-    }
-
-    render(data, inputTanggal, waktuJemput, jumlahPenumpang) {
-        const availableCars = this.filterCarsData(data, inputTanggal, waktuJemput, jumlahPenumpang);
+    render(availableCars) {
         
         if(availableCars.length === 0) {
             this.filterResultSection.innerHTML = '<h3 class=" text-center" style="margin-top: 30px">Belum ada mobil yang tersedia.</h3>'
