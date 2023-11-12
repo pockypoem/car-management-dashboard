@@ -20,7 +20,14 @@ class Car extends Component {
             const dataCapacity = car.capacity;
             const [dataHours, dataMinutes] = dataTime.split(':');
 
-            const [inputHours, inputMinutes] = waktuJemput.split(':');
+            // waktu jemput: "T01:00:00Z"
+
+            const waktuJemputArray = waktuJemput.split(':');
+
+            const inputHours = waktuJemputArray[0].substring(1); // Menghilangkan "T" dari awal string
+            const inputMinutes = waktuJemputArray[1];
+
+            // const [inputHours, inputMinutes] = waktuJemput.split(':');
             
             if (dataDate === inputTanggal) {
                 if (dataCapacity >= jumlahPenumpang) {

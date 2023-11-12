@@ -50,11 +50,11 @@ class App {
         this.getCarsData(selectedTanggal, selectedPickupTime, selectedJumlahPenumpang);
     }
 
-    convertTimeToWIB(isoFormatDateTime) {
-        const dateObj = new Date(isoFormatDateTime);
-        dateObj.setHours(dateObj.getHours() + 7);
-        return dateObj;
-    }
+    // convertTimeToWIB(isoFormatDateTime) {
+    //     const dateObj = new Date(isoFormatDateTime);
+    //     dateObj.setHours(dateObj.getHours() + 7);
+    //     return dateObj;
+    // }
 
     async getCarsData(inputTanggal, waktuJemput, jumlahPenumpang) {
         const url = 'https://raw.githubusercontent.com/pockypoem/synrgy-challenges/challenge04/data/cars.min.json';
@@ -63,7 +63,7 @@ class App {
 
         // Mengonversi nilai properti "availableAt" menjadi array ["YYYY-MM-DD", "HH:MM"]
         const convertedData = jsonResponse.map(item => {
-            const dateObj = this.convertTimeToWIB(item.availableAt);
+            const dateObj = new Date(item.availableAt);
             const wibDate = dateObj.toISOString().split('T')[0];
             const wibTime = dateObj.toISOString().split('T')[1].slice(0, 5);
             return {
