@@ -10,6 +10,7 @@ import { Model } from "objection";
 // Routers
 import CarRoutes from "./routers/CarRoutes";
 
+const path = require('path');
 
 const knexInstance = knex({
     client: "postgresql",
@@ -40,12 +41,26 @@ class App {
         this.app.use(compression());
         this.app.use(helmet());
         this.app.use(cors());
+
+        this.app.use(express.urlencoded({ extended: true }));
+
+        this.app.set("view engine", "ejs");
+        this.app.set("views", path.join(__dirname, "views"));
+
+        this.app.use(express.static(path.join(__dirname, '../public')));
+        
     }
 
     protected routes(): void {
         this.app.route("/").get((req: Request, res: Response) => {
-            res.send("Ini adalah route cuyy OOP TS");
+            res.render("index");
         });
+
+        this.app.route("/cars").get((req: Request, res: Response) => {
+            res.render("cariMobil");
+        });
+        
+        
         this.app.use("/api/v1/cars", CarRoutes);
     }
 }
