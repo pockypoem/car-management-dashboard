@@ -17,6 +17,10 @@ class CarModel extends Model {
     year!: number;
     options!: string[]; 
     specs!: string[];
+    createdBy!: string;
+    updatedBy!: string;
+    deletedBy!: string;
+    deletedAt!: Date;
 
 
     static get tableName() {

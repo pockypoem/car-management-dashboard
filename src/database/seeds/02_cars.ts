@@ -35,7 +35,9 @@ export async function seed(knex: Knex): Promise<void> {
             "Air conditioning w/in-cabin microfilter",
             "Body color folding remote-controlled pwr mirrors",
             "Dual-stage front airbags w/occupant classification system"
-          ]
+          ],
+          createdBy: "2625c868-55d3-4655-a3b1-f1e4416b39ce",
+          updatedBy: "2625c868-55d3-4655-a3b1-f1e4416b39ce"
         },
         {
           id: "9ff03bbc-b18c-4ba7-8f3a-4c4b5c2f6c77",
@@ -64,7 +66,9 @@ export async function seed(knex: Knex): Promise<void> {
             "Dual chrome exhaust tips",
             "Locking glove box",
             "Pwr front vented disc/rear drum brakes"
-          ]
+          ],
+          createdBy: "2625c868-55d3-4655-a3b1-f1e4416b39ce",
+          updatedBy: "2625c868-55d3-4655-a3b1-f1e4416b39ce"
         },
         {
           id: "bf6b5c43-1377-4ae0-8908-310c64266f81",
@@ -98,7 +102,9 @@ export async function seed(knex: Knex): Promise<void> {
             "Driver & front passenger advanced multistage airbags w/occupant sensors",
             "Silver accent IP trim finisher -inc: silver shifter finisher",
             "Fasten seat belt warning light/chime"
-          ]
+          ],
+          createdBy: "2625c868-55d3-4655-a3b1-f1e4416b39ce",
+          updatedBy: "2625c868-55d3-4655-a3b1-f1e4416b39ce"
         },
         {
           id: "5b67f1d7-92d4-41c7-8577-4435740aadf1",
@@ -132,7 +138,9 @@ export async function seed(knex: Knex): Promise<void> {
             "Electronic throttle control system w/intelligence (ETCS-i)",
             "Pwr tilt/slide moonroof -inc: 1-touch open/close",
             "Acoustic glass windshield"
-          ]
+          ],
+          createdBy: "2625c868-55d3-4655-a3b1-f1e4416b39ce",
+          updatedBy: "2625c868-55d3-4655-a3b1-f1e4416b39ce"
         },
         {
           id: "23574b8f-3e89-4685-a348-67c1f7e5b3c4",
@@ -161,7 +169,9 @@ export async function seed(knex: Knex): Promise<void> {
             "Front & rear passenger folding assist grips",
             "Electronic control braking (ECB)",
             "Black windshield molding"
-          ]
+          ],
+          createdBy: "fe2aafe6-9118-4ae5-abc0-ee5b9a9e9fd6",
+          updatedBy: "fe2aafe6-9118-4ae5-abc0-ee5b9a9e9fd6"
         },
         {
           id: "3eead6db-c536-406b-9bc5-85d4c6e38a76",
@@ -191,7 +201,9 @@ export async function seed(knex: Knex): Promise<void> {
             "Leather-wrapped shift knob",
             "Enhanced accident response system unlocks the doors, shuts off the fuel pump and turns on interior lights after airbag deploys",
             "Compact spare tire"
-          ]
+          ],
+          createdBy: "fe2aafe6-9118-4ae5-abc0-ee5b9a9e9fd6",
+          updatedBy: "fe2aafe6-9118-4ae5-abc0-ee5b9a9e9fd6"
         },
         {
           id: "752685ce-dd39-40e5-9af5-93fdd36dea7e",
@@ -224,7 +236,9 @@ export async function seed(knex: Knex): Promise<void> {
             "Torsion beam rear suspension w/stabilizer bar",
             "Impact-dissipating upper interior trim",
             "Dual front 2-stage airbags -inc: passenger occupant classification system w/twin-chamber airbag"
-          ]
+          ],
+          createdBy: "fe2aafe6-9118-4ae5-abc0-ee5b9a9e9fd6",
+          updatedBy: "fe2aafe6-9118-4ae5-abc0-ee5b9a9e9fd6"
         },
         {
           id: "d97e0af5-2728-4ce3-ba7f-9d83a0837db6",
@@ -254,7 +268,9 @@ export async function seed(knex: Knex): Promise<void> {
             "Front door tinted glass",
             "Body color door handles",
             "Chrome bodyside molding"
-          ]
+          ],
+          createdBy: "046e5aac-3492-484a-9c2b-c827cdf3b61c",
+          updatedBy: "046e5aac-3492-484a-9c2b-c827cdf3b61c"
         },
         {
           id: "0d5de078-a5fc-456b-9487-47eb450a01c6",
@@ -286,7 +302,9 @@ export async function seed(knex: Knex): Promise<void> {
             "Anti-lock 4-wheel performance disc brakes",
             "200mm front axle",
             "Dual front knee airbags"
-          ]
+          ],
+          createdBy: "046e5aac-3492-484a-9c2b-c827cdf3b61c",
+          updatedBy: "046e5aac-3492-484a-9c2b-c827cdf3b61c"
         },
         {
           id: "6dfa349e-631c-46c0-a037-5c73902ff738",
@@ -315,7 +333,9 @@ export async function seed(knex: Knex): Promise<void> {
             "Front/rear stabilizer bars",
             "Electrochromic pwr folding heated mirrors w/memory -inc: puddle lamps, integrated turn signals, auto reverse tilt-down",
             "Multi-info display -inc: driving range, average MPG, current MPG, average speed, outside temp, elapsed time, maintenance & diagnostic messages"
-          ]
+          ],
+          createdBy: "046e5aac-3492-484a-9c2b-c827cdf3b61c",
+          updatedBy: "046e5aac-3492-484a-9c2b-c827cdf3b61c"
         }
     ]
 

@@ -8,7 +8,7 @@ class CarController implements IController {
     async index(req: Request, res: Response): Promise<Response> {
       try {
         const { inputTanggal, waktuJemput, jumlahPenumpang } = req.query
-        const qCars = CarModel.query();
+        const qCars = CarModel.query().whereNull('deletedAt');
 
         if (jumlahPenumpang) {
           qCars.where('capacity', '>=', +jumlahPenumpang)
@@ -38,6 +38,8 @@ class CarController implements IController {
         ...req.body,
         specs: JSON.stringify(req.body.specs),
         options: JSON.stringify(req.body.specs),
+        createdBy: req.app.locals.credential.id,
+        updatedBy: req.app.locals.credential.id,
       };
 
       try {
@@ -57,6 +59,7 @@ class CarController implements IController {
         ...req.body,
         specs: JSON.stringify(req.body.specs),
         options: JSON.stringify(req.body.specs),
+        updatedBy: req.app.locals.credential.id
       };
   
       try {
@@ -75,7 +78,7 @@ class CarController implements IController {
       const { id } = req.params;
 
       try {
-        const car = await CarModel.query().findById(id);
+        const car = await CarModel.query().findById(id).whereNull('deletedAt');
     
         if (!car) {
           // Jika tidak ada mobil dengan ID tersebut
@@ -93,9 +96,12 @@ class CarController implements IController {
       const { id } = req.params;
     
       try {
-        const car = await CarModel.query().deleteById(id);
+        const car = await CarModel.query().patchAndFetchById(id, {
+          deletedBy: req.app.locals.credential.id,
+          deletedAt: new Date(),
+        });
     
-        if (car === 0) {
+        if (!car) {
           return res.status(404).json({ message: 'Data not found' });
         }
     

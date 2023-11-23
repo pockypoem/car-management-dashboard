@@ -24,7 +24,19 @@ export async function up(knex: Knex): Promise<void> {
         table.jsonb('options');
         table.jsonb('specs');
 
+        table.uuid("createdBy").notNullable();
+        table.foreign("createdBy").references("users.id").onDelete("SET NULL");
+        table.uuid("updatedBy").notNullable();
+        table.foreign("updatedBy").references("users.id").onDelete("SET NULL");
+        table.uuid("deletedBy").nullable().defaultTo(null);
+        table.foreign("deletedBy").references("users.id").onDelete("SET NULL");
+        table.datetime("deletedAt").nullable().defaultTo(null);
+
         table.timestamps(true, true);
+
+        
+
+        
     })
 }
 

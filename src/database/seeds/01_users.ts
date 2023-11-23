@@ -17,6 +17,12 @@ export async function seed(knex: Knex): Promise<void> {
             email: "steven@gmail.com",
             password: "$2b$10$wITEwg1ycopDQzLG/6cLJeDIXo2ed.X56pL2.gdJKMCvGt1ftfI7a",
             isAdmin: true
+        },
+        {
+            id: "046e5aac-3492-484a-9c2b-c827cdf3b61c",
+            email: "jimi@gmail.com",
+            password: "$2b$10$PTBLqCAukCLDPXkGcJ1lpuRSnUlpk3uBAlK6MS86Za/Jf/v2Zvj6O",
+            isAdmin: true
         }
     ]);
 };
