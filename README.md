@@ -4,7 +4,7 @@
 * `npm i` to install all the dependencies
 * Don't forget to make your own `.env` based on `example.env`
 * When its finish:
-    * `npm run ts` to compile all these typescript things
+    * `npm run build:watch` to compile all these typescript things
     * `npm run dev` to run the server ⚡
 
 ## About Migrations and Seeds
@@ -14,15 +14,15 @@
 ## Entity Relationship Diagram
 
 For now only one table is available: <br>
-![Table Car](imagesforREADME/tableCars-dbdiagram.png) <br>
+![Table Car](imagesforREADME/ERD-dbdiagram.png) <br>
 
 ## Endpoints
 
 ### Frontend
  URI | Description | 
  --- | ----------- |
-/    | index (landing page) |
-/cars | Find Available Car |
+`/`     | index (landing page) |
+`/cars` | Find Available Car |
 
 ### Backend
 Method | URI | Description | 
@@ -33,9 +33,15 @@ Method | URI | Description |
 **UPDATE** | `/api/v1/cars/:id` | Update specific car data from database by ID |
 **DELETE** | `/api/v1/cars/:id` | Delete specific car data from database by ID |
 
+### Documentations
+ URI | Description | 
+ --- | ----------- |
+ `/docs` | Documentation with Swagger OpenAPI |
+
+
 <br>
 
-You can see about the collections of those endpoint in [this postman's collection link](https://api.postman.com/collections/17866226-0f681f4e-3adc-4cc0-934e-47fd02781c1e?access_key=PMAT-01HEWNMCSMQ6801R6N5XCNDDG4)
+<!-- You can see about the collections of those endpoint in [this postman's collection link](https://api.postman.com/collections/17866226-0f681f4e-3adc-4cc0-934e-47fd02781c1e?access_key=PMAT-01HEWNMCSMQ6801R6N5XCNDDG4) -->
 
 <br>
 
@@ -43,6 +49,11 @@ You can see about the collections of those endpoint in [this postman's collectio
 
 
 ## Tech Stack
+* Frontend
+    * HTML
+    * CSS
+    * Javascript
+    * Bootstrap
 * Backend
     * typescript
     * nodejs, expressjs

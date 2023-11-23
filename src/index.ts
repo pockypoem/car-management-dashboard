@@ -7,6 +7,9 @@ import cors from "cors";
 import knex from "knex";
 import { Model } from "objection";
 
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./utils/swagger";
+
 // Routers
 import UserRoutes from "./routers/UserRoutes";
 import AuthRoutes from "./routers/AuthRoutes";
@@ -47,6 +50,8 @@ class App {
 
         this.app.use(express.urlencoded({ extended: true }));
 
+        this.app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
         this.app.set("view engine", "ejs");
         this.app.set("views", path.join(__dirname, "views"));
 
@@ -74,5 +79,6 @@ const app = new App().app;
 
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
+
 })
 
