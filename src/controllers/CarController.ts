@@ -105,61 +105,6 @@ class CarController implements IController {
         return res.status(500).json({ error: 'Internal Server Error' });
       }
     }
-
-
-    // async searchCars(req: Request, res: Response) {
-
-    //   const { tipeDriver, tanggal, pickupTime, jumlahPenumpang } = req.query;
-    //   console.log(tanggal, pickupTime, jumlahPenumpang)
-
-    //     Konversi tanggal dan pickupTime ke format yang sesuai dengan format di database
-    //     const targetDate = new Date(`${tanggal}T${pickupTime}:00.000Z`);
-    //     console.log(targetDate);
-
-    //     const data = await CarModel.query()
-    //         .where('availableAt', '>=', targetDate)
-    //         .where('capacity', '>=', jumlahPenumpang)
-    //         .orderBy('rentPerDay', 'asc');
-
-    //     res.json(data);
-    //   const { tipeDriver, tanggal, pickupTime, jumlahPenumpang } = req.params;
-        
-    //   // Konversi tanggal dan pickupTime ke format yang sesuai dengan format di database
-    //   const targetDate = new Date(`${tanggal}T${pickupTime}:00.000Z`);
-    //   console.log(targetDate);
-
-    //   const data = await CarModel.query()
-    //     .where('availableAt', '<=', targetDate)
-    //     .where('capacity', '>=', jumlahPenumpang)
-    //     .orderBy('rentPerDay', 'asc');
-
-    //   res.json(data);
-
-
-    // }
-
-    // async searchCarsPost(req: Request, res: Response) {
-    //   try {
-    //       const { tipeDriver, tanggal, pickupTime, jumlahPenumpang } = req.body;
-
-    //       // Ubah tanggal dan waktu ke format yang sesuai dengan format di database
-    //       const targetDate = new Date(`${tanggal}T${pickupTime}:00.000Z`);
-
-    //       // Lakukan query ke database sesuai dengan logika pencarian Anda
-    //       const data = await CarModel.query()
-    //           .where('availableAt', '>=', targetDate)
-    //           .where('capacity', '>=', jumlahPenumpang)
-    //           .orderBy('rentPerDay', 'asc');
-
-    //       // Tampilkan hasil pencarian
-    //       res.json(data);
-    //   } catch (error) {
-    //       console.error(error);
-    //       res.status(500).json({ error: 'Internal Server Error' });
-    //   }
-    // }
-
-
     
 }
 

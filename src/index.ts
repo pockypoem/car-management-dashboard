@@ -8,7 +8,10 @@ import knex from "knex";
 import { Model } from "objection";
 
 // Routers
+import UserRoutes from "./routers/UserRoutes";
+import AuthRoutes from "./routers/AuthRoutes";
 import CarRoutes from "./routers/CarRoutes";
+
 
 const path = require('path');
 
@@ -60,7 +63,8 @@ class App {
             res.render("cariMobil");
         });
         
-        
+        this.app.use("/api/v1/users",  UserRoutes);
+        this.app.use("/api/v1/auth", AuthRoutes);
         this.app.use("/api/v1/cars", CarRoutes);
     }
 }
