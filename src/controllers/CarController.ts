@@ -1,117 +1,97 @@
 import { Request, Response } from "express";
 import IController from "./ControllerInterface";
-// import { v4 as uuidv4 } from "uuid";
-import CarModel from "../database/models/cars";
-
+import CarService from "../services/CarService";
 
 class CarController implements IController {
-    async index(req: Request, res: Response): Promise<Response> {
-      try {
-        const { inputTanggal, waktuJemput, jumlahPenumpang } = req.query
-        const qCars = CarModel.query().whereNull('deletedAt');
+  async index(req: Request, res: Response): Promise<Response> {
+    try {
+      const { inputTanggal, waktuJemput, jumlahPenumpang } = req.query;
+      const cars = await CarService.getAllCars({
+        inputTanggal: inputTanggal as string,
+        waktuJemput: inputTanggal as string,
+        jumlahPenumpang: jumlahPenumpang as string,
+      });
 
-        if (jumlahPenumpang) {
-          qCars.where('capacity', '>=', +jumlahPenumpang)
-        }
-
-        if (inputTanggal) {
-          qCars.whereRaw("to_char(\"availableAt\", 'YYYY-MM-DD') = ?", [inputTanggal as string])
-        }
-
-        if (waktuJemput) {
-          qCars.whereRaw("to_char(\"availableAt\", 'HH24:MI') <= ?", [waktuJemput])
-        }
-
-        const cars = await qCars.debug()
-        return res.status(200).json(cars);
-      } catch (error) {
-        console.error(error);
-        return res.status(500).json({
-          error: "Internal Server Error"
-        })
-        
-      }
+      return res.status(200).json(cars);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({
+        error: "Internal Server Error",
+      });
     }
+  }
 
-    async create(req: Request, res: Response) : Promise<Response> {
-      const carData = {
-        ...req.body,
-        specs: JSON.stringify(req.body.specs),
-        options: JSON.stringify(req.body.specs),
-        createdBy: req.app.locals.credential.id,
-        updatedBy: req.app.locals.credential.id,
-      };
+  async create(req: Request, res: Response): Promise<Response> {
+    const carData = {
+      ...req.body,
+      specs: JSON.stringify(req.body.specs),
+      options: JSON.stringify(req.body.specs),
+    };
 
-      try {
-        const newCar = await CarModel.query().insert(carData);
-        return res.status(201).send(newCar)
-      } catch (error) {
-        console.error(error);
-        return res.status(500).json({
-          error: "Internal Server Error"
-        })
-      }
+    try {
+      const newCar = await CarService.createCar(carData, req.app.locals.credential.id);
+      return res.status(201).send(newCar);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({
+        error: "Internal Server Error",
+      });
     }
+  }
 
-    async update(req: Request, res: Response): Promise<Response> {
-      const { id } = req.params;
-      const updatedCarData = {
-        ...req.body,
-        specs: JSON.stringify(req.body.specs),
-        options: JSON.stringify(req.body.specs),
-        updatedBy: req.app.locals.credential.id
-      };
+  async update(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+    const updatedCarData = {
+      ...req.body,
+      specs: JSON.stringify(req.body.specs),
+      options: JSON.stringify(req.body.specs),
+    };
+
+    try {
+      const updatedCar = await CarService.updateCar(id, updatedCarData, req.app.locals.credential.id);
+      if (!updatedCar) {
+        return res.status(404).json({ error: 'Car not found' });
+      }
+      return res.status(200).send(updatedCarData);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
+
+  async show(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+
+    try {
+      const car = await CarService.getCarById(id);
   
-      try {
-        const updatedCar = await CarModel.query().patchAndFetchById(id, updatedCarData);
-        if (!updatedCar) {
-          return res.status(404).json({ error: 'Car not found' });
-        }
-        return res.status(200).send(updatedCarData);
-      } catch (error) {
-        console.error(error);
-        return res.status(500).json({ error: 'Internal Server Error' });
+      if (!car) {
+        return res.status(404).json({ message: 'Data not found' });
       }
+  
+      return res.status(200).json(car);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
+  }
 
-    async show(req: Request, res: Response): Promise<Response> {
-      const { id } = req.params;
-
-      try {
-        const car = await CarModel.query().findById(id).whereNull('deletedAt');
-    
-        if (!car) {
-          // Jika tidak ada mobil dengan ID tersebut
-          return res.status(404).json({ message: 'Data not found' });
-        }
-    
-        return res.status(200).json(car);
-      } catch (error) {
-        console.error(error);
-        return res.status(500).json({ error: 'Internal Server Error' });
+  async delete(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+  
+    try {
+      const car = await CarService.deleteCar(id, req.app.locals.credential.id);
+  
+      if (!car) {
+        return res.status(404).json({ message: 'Data not found' });
       }
+  
+      return res.status(204).json({ message: 'Berhasil hapus data' });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
-
-    async delete(req: Request, res: Response): Promise<Response> {
-      const { id } = req.params;
-    
-      try {
-        const car = await CarModel.query().patchAndFetchById(id, {
-          deletedBy: req.app.locals.credential.id,
-          deletedAt: new Date(),
-        });
-    
-        if (!car) {
-          return res.status(404).json({ message: 'Data not found' });
-        }
-    
-        return res.status(204).json({ message: 'Berhasil hapus data' });
-      } catch (error) {
-        console.error(error);
-        return res.status(500).json({ error: 'Internal Server Error' });
-      }
-    }
-    
+  }
 }
 
 export default new CarController();

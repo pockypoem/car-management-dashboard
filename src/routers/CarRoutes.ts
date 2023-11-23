@@ -10,7 +10,7 @@ class CarRoutes extends BaseRoutes {
     public routes(): void {
         // this.router.use(auth);
         
-        this.router.get("/", auth, CarController.index);
+        this.router.get("/", CarController.index);
         this.router.post("/", auth, CarController.create);
         this.router.get("/:id", auth, CarController.show);
         this.router.put("/:id", auth, CarController.update);
