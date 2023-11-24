@@ -38,11 +38,6 @@ Method | URI | Description |
  --- | ----------- |
  `/docs` | Documentation with Swagger OpenAPI |
 
-
-<br>
-
-<!-- You can see about the collections of those endpoint in [this postman's collection link](https://api.postman.com/collections/17866226-0f681f4e-3adc-4cc0-934e-47fd02781c1e?access_key=PMAT-01HEWNMCSMQ6801R6N5XCNDDG4) -->
-
 <br>
 
 > If you want to try and input data or update data, you can use data from [this](https://github.com/pockypoem/car-management-dashboard/blob/main/src/data/cars.json)
