@@ -44,7 +44,7 @@ class CarController implements IController {
     const updatedCarData = {
       ...req.body,
       specs: JSON.stringify(req.body.specs),
-      options: JSON.stringify(req.body.specs),
+      options: JSON.stringify(req.body.options),
     };
 
     try {
