@@ -27,7 +27,7 @@ class AuthController {
             if(token) {
                 return res.send({ token });
             }
-            return res.send("Auth Failed");
+            return res.json({message: "Auth Failed"});
         } catch (error) {
             console.error("Error during login: ", error);
             return res.status(500).json({ error: "Internal Server Error" });
