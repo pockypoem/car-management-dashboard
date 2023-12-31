@@ -84,7 +84,7 @@ class CarRoutes extends BaseRoutes {
          *                      plate: "BHD-3923"
          *                      manufacture: "Lincoln"
          *                      model: "Navigator"
-         *                      image: "./images/car05.min.jpg"
+         *                      image: "https://i.ibb.co/J51QXrr/car05-min.jpg"
          *                      rentPerDay: 200000
          *                      capacity: 2
          *                      description: "Body color sill extension. Torsion beam rear suspension w/stabilizer bar. Front & rear passenger folding assist grips."
