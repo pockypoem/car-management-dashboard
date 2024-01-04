@@ -2,3 +2,4 @@ node_modules/
 build/
 backups/
 .env/
+/google_creds.json
