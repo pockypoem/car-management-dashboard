@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 // Update with your config settings.
 
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
+console.log(process.env["DATABASE_URL"])
 
 const config: { [key: string]: Knex.Config } = {
 
