@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node dist/index.js",
     "migrate": "npx knex migrate:latest --knexfile src/knexfile.ts",
     "copy-assets": "npx copyfiles -u 1 ./src/views/* ./build/",
     "build:watch": "npm run copy-assets && tsc -w",
