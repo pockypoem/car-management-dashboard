@@ -21,14 +21,9 @@ import AuthRoutes from "./routers/AuthRoutes";
 import CarRoutes from "./routers/CarRoutes";
 
 
-
 const knexInstance = knex({
     client: "postgresql",
-    connection: {
-      database: 'postgres',
-      user: 'postgres',
-      password: 'docker'
-    },
+    connection: process.env['DATABASE_URL'],
 });
 
 // Connect ORM to Database
@@ -78,7 +73,7 @@ class App {
     }
 }
 
-const PORT: number = 8000;
+const PORT: number = 3000;
 const app = new App().app;
 
 app.listen(PORT, () => {
