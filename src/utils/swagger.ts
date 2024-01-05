@@ -17,6 +17,10 @@ const definition = {
             url: "http://localhost:8000",
             description: "Car Management RESTful API Server"
         },
+        {
+            url: "https://binar-car-rental-api.fly.dev",
+            description: "Car Management RESTful API Server Prod"
+        },
     ],
     components: {
         securitySchemas: {
