@@ -9,7 +9,8 @@
     "copy-assets": "npx copyfiles -u 1 ./src/views/* ./build/",
     "build:watch": "npm run copy-assets && tsc -w",
     "build": "tsc && npm run copy-assets",
-    "dev": "nodemon ./build/index.js"
+    "dev": "nodemon ./build/index.js",
+    "coverage": "vitest run --coverage"
   },
   "keywords": [],
   "author": "",
@@ -27,7 +28,6 @@
     "@types/uuid": "^9.0.7",
     "@types/validator": "^13.11.7",
     "copyfiles": "^2.4.1",
-    "morgan": "^1.9.1",
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
@@ -48,6 +48,7 @@
     "helmet": "^3.21.2",
     "jsonwebtoken": "^9.0.2",
     "knex": "^3.0.1",
+    "morgan": "^1.9.1",
     "objection": "^3.1.2",
     "pg": "^8.11.3",
     "swagger-jsdoc": "^6.2.8",
