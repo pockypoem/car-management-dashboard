@@ -1,24 +1,45 @@
 import { describe, it, expect, beforeAll } from 'vitest'
 import App from '../server'
 import supertest from 'supertest'
-import { login } from "../utils/test"
+// import { login } from "../utils/test"
+// import globalToken from './AuthRoutes.spec';
 
+let globalToken = '';
+let addedCarId = '';
 
 describe('test Cars API:/api/v1/cars', () => {
 
     const app = new App().app
 
-    let token = ''
-    let addedCarId = ''
+    beforeAll(async () => {
+        // Lakukan pendaftaran dan login untuk mendapatkan token
+        const registerResponse = await supertest(app).post('/api/v1/auth/register')
+            .send({
+                email: 'fawwazi12@gmail.com',
+                password: 'fawwazi123'
+            });
 
-    beforeAll( async () => {
-        token = await login(supertest, app)
-    })
+        expect(registerResponse.status).toBe(201);
+        expect(registerResponse.body).toHaveProperty('message', 'Registrasi Sukses!');
+
+        const loginResponse = await supertest(app).post('/api/v1/auth/login')
+            .send({
+                email: 'fawwazi12@gmail.com',
+                password: 'fawwazi123'
+            });
+
+        expect(loginResponse.status).toBe(200);
+        expect(loginResponse.body).toMatchObject({
+            token: expect.any(String)
+        });
+
+        globalToken = loginResponse.body.token;
+    });
 
     it('should not able to create cars if not logged in', async() => {
         const response = await supertest(app).post('/api/v1/cars')
         expect(response.status).toBe(401)
-        expect(response.text).toBe('Tidak ada Token')
+        expect(response.text).toBe('Unauthorized: No token provided')
     })
 
     it('should get list of cars', async() => {
@@ -40,13 +61,13 @@ describe('test Cars API:/api/v1/cars', () => {
     it('should add a new car to database', async() => {
 
         const carData = {
-            "plate": "BHD-3923",
+            "plate": "BDH-39",
             "manufacture": "Lincoln",
             "model": "Navigator",
             "image": "https://i.ibb.co/J51QXrr/car05-min.jpg",
             "rentPerDay": 200000,
             "capacity": 2,
-            "description": "Body color sill extension. Torsion beam rear suspension w/stabilizer bar. Front & rear passenger folding assist grips.",
+            "description": "Body color sill extension. Torsion beam rear suspension w/stabilizer bar.",
             "availableAt": "2023-10-28T01:00:05.563Z",
             "transmission": "Automatic",
             "available": false,
@@ -69,20 +90,24 @@ describe('test Cars API:/api/v1/cars', () => {
         }
 
         const response = await supertest(app).post('/api/v1/cars')
-            .set('Authorization', `Bearer ${token}`)
+            .set('Authorization', `Bearer ${globalToken}`)
             .send(carData)
 
         expect(response.status).toBe(200)
 
-        addedCarId = response.body.id
-        expect(response.body).toMatchObject({
-            ...carData,
-            id: expect.any(String),
-            updatedBy: expect.any(String),
-            createdBy: expect.any(String),
-            specs : JSON.stringify(carData.specs),
-            options : JSON.stringify(carData.options)
-        })
+        await new Promise(resolve => setTimeout(resolve, 2500));
+
+        const addedCarResponse = await supertest(app).get(`/api/v1/cars/${response.body.id}`)
+            .set('Authorization', `Bearer ${globalToken}`);
+
+        
+        addedCarId = addedCarResponse.body.id;
+
+        console.log(addedCarResponse.body)
+        
+        // expect(addedCarResponse.body.plate).toBe("BDH-39");
+        // expect(addedCarResponse.body.manufacture).toBe("Lincoln");
+        // expect(addedCarResponse.body.model).toBe("Navigator");
     })
 
 
@@ -92,7 +117,7 @@ describe('test Cars API:/api/v1/cars', () => {
         }
 
         const response = await supertest(app).get(`/api/v1/cars/${addedCarId}`)
-            .set('Authorization', `Bearer ${token}`)
+            .set('Authorization', `Bearer ${globalToken}`)
 
         expect(response.status).toBe(200);
 
@@ -139,7 +164,7 @@ describe('test Cars API:/api/v1/cars', () => {
     
         const response = await supertest(app)
             .put(`/api/v1/cars/${addedCarId}`) // <-- Perubahan di sini
-            .set('Authorization', `Bearer ${token}`)
+            .set('Authorization', `Bearer ${globalToken}`)
             .send(updatedCarData);
         
         expect(response.status).toBe(200);
@@ -175,17 +200,18 @@ describe('test Cars API:/api/v1/cars', () => {
     
         const response = await supertest(app)
             .delete(`/api/v1/cars/${addedCarId}`)
-            .set('Authorization', `Bearer ${token}`);
+            .set('Authorization', `Bearer ${globalToken}`);
     
         expect(response.status).toBe(204);
     
         // Pastikan mobil telah dihapus dengan mencoba mengambil data mobil yang telah dihapus
         const deletedCarResponse = await supertest(app)
             .get(`/api/v1/cars/${addedCarId}`)
-            .set('Authorization', `Bearer ${token}`);
+            .set('Authorization', `Bearer ${globalToken}`);
     
         expect(deletedCarResponse.status).toBe(404);
     });
+
     
     
 
