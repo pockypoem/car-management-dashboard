@@ -31,8 +31,8 @@ jobs:
           cat .env
       - name: Migrate Database 
         run: npx knex migrate:latest --knexfile ./src/knexfile.ts && npx knex seed:run --knexfile ./src/knexfile.ts
-      # - name: Test Coverage
-      #   run: npm run coverage
+      - name: Test Coverage
+        run: npm run coverage
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
         env:

@@ -3,3 +3,4 @@ build/
 backups/
 .env
 /google_creds.json
+coverage/
