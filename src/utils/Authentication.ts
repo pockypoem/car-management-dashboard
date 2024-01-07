@@ -14,7 +14,7 @@ class Authentication {
 
     // generate berdasarkan id dan password
     public static generateToken = (id: string, password: string): string => {
-        const secretKey: string = process.env.JWT_SECRET_KEY || "secret";
+        const secretKey: string = process.env.JWT_SECRET_KEY ?? "secret";
         
         const token : string = jwt.sign({ id, password }, secretKey);
         return token;
