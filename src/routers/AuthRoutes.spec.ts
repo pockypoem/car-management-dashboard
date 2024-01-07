@@ -20,7 +20,7 @@ describe('test auth API:/api/v1/auth', () => {
     it('it should success on login', async () => {
         const response = await supertest(app).post('/api/v1/auth/login')
             .send({
-                email: 'fawwazi@gmail.com',
+                email: 'fawwazi12345@gmail.com',
                 password: 'fawwazi123'
             })
         expect(response.status).toBe(200)
