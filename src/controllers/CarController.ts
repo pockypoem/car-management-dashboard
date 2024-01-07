@@ -25,12 +25,12 @@ class CarController implements IController {
     const carData = {
       ...req.body,
       specs: JSON.stringify(req.body.specs),
-      options: JSON.stringify(req.body.specs),
+      options: JSON.stringify(req.body.options),
     };
 
     try {
       const newCar = await CarService.createCar(carData, req.app.locals.credential.id);
-      return res.status(201).send(newCar);
+      return res.status(200).send(newCar);
     } catch (error) {
       console.error(error);
       return res.status(500).json({
@@ -52,7 +52,7 @@ class CarController implements IController {
       if (!updatedCar) {
         return res.status(404).json({ error: 'Car not found' });
       }
-      return res.status(200).send(updatedCarData);
+      return res.status(200).send(updatedCar);
     } catch (error) {
       console.error(error);
       return res.status(500).json({ error: 'Internal Server Error' });
