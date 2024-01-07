@@ -1,8 +1,5 @@
 # Binar Car Rental
 
-## Announcement ⚠️
-Challenge Chapter 08 has not been done yet (in progress soon)
-
 ## Guide to Run 
 * `npm i` to install all the dependencies
 * Don't forget to make your own `.env` based on `example.env`
